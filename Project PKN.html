@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MAPS Project PKN — Workflow & Timeline</title>
+<!-- Glacial Indifference via CDN alternative: use Nunito as closest match -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   MAPS DESIGN TOKENS
+   ========================================================= */
+:root {
+  /* Brand Colors */
+  --blue:        #2C479E;
+  --blue-light:  #5167AE;
+  --blue-mid:    #8493C6;
+  --blue-pale:   #98A5CF;
+  --blue-bg:     rgba(44,71,158,0.08);
+  --blue-bd:     rgba(44,71,158,0.30);
+
+  --yellow:      #DBD961;
+  --yellow-bg:   rgba(219,217,97,0.12);
+  --yellow-bd:   rgba(219,217,97,0.40);
+
+  /* Backgrounds (light theme) */
+  --bg:          #F8F9FC;
+  --surface:     #FFFFFF;
+  --surface2:    #F0F2F8;
+  --surface3:    #E8EBF4;
+
+  /* Borders */
+  --border:      rgba(44,71,158,0.10);
+  --border2:     rgba(44,71,158,0.22);
+
+  /* Text */
+  --text:        #1A2340;
+  --muted:       #6B7AA1;
+  --faint:       #B8C0D8;
+
+  /* Divisi Colors — mapped to brand palette */
+  --c-inti:      #2C479E;
+  --c-inti-bg:   rgba(44,71,158,0.08);
+  --c-inti-bd:   rgba(44,71,158,0.28);
+
+  --c-brain:     #5167AE;
+  --c-brain-bg:  rgba(81,103,174,0.08);
+  --c-brain-bd:  rgba(81,103,174,0.28);
+
+  --c-exec:      #DBD961;
+  --c-exec-bg:   rgba(180,178,50,0.10);
+  --c-exec-bd:   rgba(180,178,50,0.40);
+  --c-exec-text: #5a5800;
+
+  --c-vis:       #4B7BE5;
+  --c-vis-bg:    rgba(75,123,229,0.08);
+  --c-vis-bd:    rgba(75,123,229,0.28);
+
+  --c-pub:       #8493C6;
+  --c-pub-bg:    rgba(132,147,198,0.10);
+  --c-pub-bd:    rgba(132,147,198,0.30);
+
+  /* Semantic */
+  --green:       #2E7D5E;
+  --green-bg:    rgba(46,125,94,0.08);
+  --red:         #C0392B;
+  --red-bg:      rgba(192,57,43,0.08);
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Nunito Sans', 'Nunito', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+header {
+  background: var(--blue);
+  padding: 36px 24px 32px;
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.header-left {}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--blue-pale);
+  margin-bottom: 8px;
+}
+header h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(24px, 4.5vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+header h1 .ac { color: var(--yellow); }
+.header-meta { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 11px; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.badge .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.logo-box {
+  width: 52px; height: 52px;
+  background: var(--yellow);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(45deg);
+}
+.logo-box span {
+  transform: rotate(-45deg);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--blue);
+  letter-spacing: -.02em;
+}
+.logo-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+.logo-text span { color: var(--yellow); }
+
+/* =========================================================
+   TAB NAV
+   ========================================================= */
+.tab-nav-wrap {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(44,71,158,0.08);
+}
+.tab-nav {
+  max-width: 960px; margin: 0 auto;
+  padding: 0 24px;
+  display: flex; gap: 2px;
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none; border: none;
+  padding: 14px 18px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--muted);
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .18s, border-color .18s;
+  margin-bottom: -2px;
+  letter-spacing: .02em;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-btn:hover  { color: var(--blue); }
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--yellow); }
+
+/* =========================================================
+   CONTENT WRAPPER
+   ========================================================= */
+.content {
+  max-width: 960px; margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fi .18s ease; }
+@keyframes fi { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+.sl {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--blue-light); margin-bottom: 12px; margin-top: 36px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sl::after { content: ''; flex: 1; height: 1.5px; background: var(--blue-bg); border-radius: 2px; }
+.sl:first-child { margin-top: 4px; }
+
+/* =========================================================
+   DESIGN GUIDELINES TAB
+   ========================================================= */
+.dg-intro {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 28px; line-height: 1.7;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--yellow);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+}
+.dg-intro strong { color: var(--blue); font-weight: 700; }
+
+/* Color swatches */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.color-card {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.color-swatch {
+  height: 72px;
+  width: 100%;
+}
+.color-info {
+  padding: 10px 12px;
+}
+.color-name {
+  font-size: 12px; font-weight: 700; color: var(--text);
+  margin-bottom: 2px;
+}
+.color-hex {
+  font-size: 11px; color: var(--muted);
+  font-family: monospace; letter-spacing: .04em;
+}
+.color-role {
+  font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--blue-pale);
+  margin-top: 3px;
+}
+
+/* Gradient strips */
+.grad-strip {
+  display: flex;
+  height: 48px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.grad-step {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 4px 6px;
+}
+.grad-step span {
+  font-size: 9px; font-weight: 700;
+  font-family: monospace;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Font specimens */
+.font-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.font-header {
+  background: var(--blue);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.font-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); }
+.font-name  { font-size: 16px; font-weight: 700; color: #fff; }
+.font-meta  { font-size: 11px; color: var(--blue-pale); }
+.font-preview {
+  padding: 20px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.font-specs {
+  padding: 10px 18px;
+  background: var(--surface2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.font-spec-item {
+  font-size: 11px; color: var(--muted);
+}
+.font-spec-item strong { color: var(--blue); font-weight: 700; }
+
+/* Usage guidelines */
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.usage-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  border-top: 3px solid;
+}
+.usage-icon { font-size: 20px; margin-bottom: 8px; }
+.usage-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.usage-desc  { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.usage-tag   { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 700;
+               padding: 2px 8px; border-radius: 100px; letter-spacing: .04em; }
+
+/* =========================================================
+   OVERVIEW WORKFLOW STEPPER
+   ========================================================= */
+.ov-intro {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 24px; line-height: 1.6;
+}
+.ov-intro strong { color: var(--blue); font-weight: 700; }
+.ov-stepper { display: flex; flex-direction: column; gap: 0; }
+.ov-row {
+  display: flex; align-items: flex-start; gap: 0;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.ov-left {
+  display: flex; flex-direction: column; align-items: center;
+  flex-shrink: 0; width: 46px;
+}
+.ov-icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 2px solid; display: flex; align-items: center;
+  justify-content: center; font-size: 17px;
+  flex-shrink: 0; transition: box-shadow .2s;
+  position: relative; z-index: 1;
+  background: var(--surface);
+}
+.ov-row:hover .ov-icon { box-shadow: 0 0 0 5px var(--blue-bg); }
+.ov-line { width: 2px; flex: 1; min-height: 16px; background: var(--faint); }
+.ov-row:last-child .ov-line { display: none; }
+.ov-right { padding: 10px 0 22px 14px; flex: 1; min-width: 0; }
+.ov-row:last-child .ov-right { padding-bottom: 0; }
+.ov-step-num { font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1px; }
+.ov-step-title { font-size: 14px; font-weight: 800; line-height: 1.2; margin-bottom: 3px; font-family: 'Nunito', sans-serif; }
+.ov-step-who { font-size: 11px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+.ov-step-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+/* Phase pills */
+.ov-phases { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.ov-phase {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 100px; padding: 5px 13px 5px 10px;
+}
+.ov-phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ov-phase-text { font-size: 11px; font-weight: 700; }
+.ov-phase-days { font-size: 10px; color: var(--muted); margin-left: 2px; }
+
+/* =========================================================
+   TIMELINE TABLE
+   ========================================================= */
+.tl-wrap {
+  overflow-x: auto; border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 2px 12px rgba(44,71,158,0.06);
+}
+table.tl { width: 100%; border-collapse: collapse; min-width: 560px; }
+table.tl thead tr { background: var(--blue); }
+table.tl th {
+  padding: 11px 6px; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-align: center;
+  color: rgba(255,255,255,0.75);
+  border-bottom: 2px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+}
+table.tl th:first-child { text-align:left; padding-left:14px; min-width:148px; color: rgba(255,255,255,0.9); }
+table.tl th.weekend-col { color: var(--yellow); background: rgba(0,0,0,0.12); }
+table.tl td { padding: 4px 3px; vertical-align: middle; }
+table.tl td:first-child { padding-left:14px; padding-right:6px; }
+table.tl td.weekend-col { background: rgba(219,217,97,0.04); }
+table.tl tr:not(.gr):hover td { background: rgba(44,71,158,0.04); }
+.tl-name { font-size:12px; font-weight:700; color:var(--text); white-space:nowrap; }
+.tl-sub  { font-size:10px; color:var(--muted); }
+.gr td {
+  background: var(--surface2); padding: 5px 14px;
+  font-size: 9px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--blue-light);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.bar {
+  border-radius: 5px; height: 22px; width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; white-space: nowrap;
+  overflow: hidden; letter-spacing: .01em;
+}
+.be  { background: transparent; }
+.bbl { background: var(--c-inti-bg);  color: var(--blue); }
+.bbu { background: var(--c-brain-bg); color: var(--blue-light); }
+.bbt { background: var(--c-brain-bg); color: var(--blue-light); }
+.bye { background: var(--c-exec-bg);  color: var(--c-exec-text); }
+.bv  { background: var(--c-vis-bg);   color: var(--c-vis); }
+.bpb { background: var(--c-pub-bg);   color: var(--blue); }
+.bgn { background: var(--green-bg);   color: var(--green); }
+.brd { background: var(--red-bg);     color: var(--red); }
+
+.tl-legend { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.leg { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; color:var(--muted); }
+.leg-sw { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+
+.pp-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.pp {
+  display:flex; align-items:center; gap:7px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-sm); padding:7px 12px;
+  font-size:12px; color:var(--muted); font-weight:600;
+}
+.pp strong { color:var(--blue); font-weight:700; }
+
+/* =========================================================
+   WORKFLOW DETAIL CARDS
+   ========================================================= */
+.phase-block { margin-bottom: 36px; }
+.phase-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.phase-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px; font-weight: 800; flex-shrink: 0;
+}
+.phase-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px; font-weight: 800; letter-spacing: -.01em;
+}
+.phase-days { font-size: 11px; color: var(--muted); font-weight: 600; margin-left: auto; white-space: nowrap; }
+.f1 .phase-num   { background: var(--c-inti-bg); color: var(--blue); }
+.f1 .phase-title { color: var(--blue); }
+.f2 .phase-num   { background: var(--c-exec-bg); color: var(--c-exec-text); }
+.f2 .phase-title { color: #5a5800; }
+.f3 .phase-num   { background: var(--c-vis-bg); color: var(--c-vis); }
+.f3 .phase-title { color: var(--c-vis); }
+.f4 .phase-num   { background: var(--c-brain-bg); color: var(--blue-light); }
+.f4 .phase-title { color: var(--blue-light); }
+
+.cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 14px;
+  transition: border-color .2s, box-shadow .2s, transform .15s;
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+}
+.card:hover {
+  border-color: var(--border2);
+  box-shadow: 0 4px 16px rgba(44,71,158,0.10);
+  transform: translateY(-2px);
+}
+.ct { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:9px; }
+.cd { font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+.cn { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; font-family: 'Nunito', sans-serif; }
+.ci { font-size: 18px; line-height: 1; flex-shrink: 0; margin-left: 6px; opacity: .6; }
+.tl-tasks { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.tl-tasks li { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.tl-tasks li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.fa { display: flex; align-items: center; justify-content: center; padding: 6px 0; color: var(--faint); font-size: 20px; font-weight: 700; }
+
+.vbl .cd{color:var(--blue);} .vbl::before{background:var(--blue);} .vbl .tl-tasks li::before{background:var(--blue);}
+.vbu .cd{color:var(--blue-light);} .vbu::before{background:var(--blue-light);} .vbu .tl-tasks li::before{background:var(--blue-light);}
+.vye .cd{color:var(--c-exec-text);} .vye::before{background:var(--yellow);} .vye .tl-tasks li::before{background:var(--yellow);}
+.vvs .cd{color:var(--c-vis);} .vvs::before{background:var(--c-vis);} .vvs .tl-tasks li::before{background:var(--c-vis);}
+.vpb .cd{color:var(--blue-light);} .vpb::before{background:var(--blue-pale);} .vpb .tl-tasks li::before{background:var(--blue-pale);}
+.vgn .cd{color:var(--green);} .vgn::before{background:var(--green);} .vgn .tl-tasks li::before{background:var(--green);}
+.vrd .cd{color:var(--red);} .vrd::before{background:var(--red);} .vrd .tl-tasks li::before{background:var(--red);}
+
+/* =========================================================
+   JOB DESK
+   ========================================================= */
+.jg { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.jc {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.jc:hover { border-color: var(--border2); box-shadow: 0 4px 16px rgba(44,71,158,0.08); }
+.jh { padding: 13px 14px 10px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+.ji { width: 34px; height: 34px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.jn { font-size: 13px; font-weight: 700; color: var(--text); font-family: 'Nunito', sans-serif; }
+.jt { font-size: 11px; color: var(--muted); font-weight: 600; }
+.jb { padding: 11px 14px; }
+.jl { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.jl li { display: flex; gap: 8px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.jl li::before { content: '›'; flex-shrink: 0; font-size: 13px; margin-top: -1px; color: var(--blue-mid); font-weight: 700; }
+
+/* =========================================================
+   STRUKTUR
+   ========================================================= */
+.struct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.struct-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.struct-header {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.struct-icon {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.struct-div-name { font-size: 13px; font-weight: 700; color: var(--text); font-family: 'Nunito', sans-serif; }
+.struct-div-cat  { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.struct-body { padding: 8px 0; }
+.member-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 14px;
+  transition: background .15s;
+}
+.member-row:hover { background: var(--surface2); }
+.member-num {
+  width: 20px; height: 20px;
+  background: var(--surface2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 800; color: var(--muted);
+  flex-shrink: 0;
+}
+.mname { font-size: 12px; font-weight: 600; color: var(--text); flex: 1; }
+.mrole { font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+
+/* Leadership row */
+.leader-section {
+  background: var(--blue);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.leader-block {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; flex: 1; min-width: 100px;
+}
+.leader-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.leader-name { font-size: 13px; font-weight: 700; color: #fff; text-align: center; font-family: 'Nunito', sans-serif; }
+.leader-role { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); text-align: center; }
+.leader-sep { width: 1px; height: 52px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 640px) {
+  header { padding: 24px 16px 20px; }
+  .content { padding: 20px 16px 60px; }
+  .tab-nav { padding: 0 16px; }
+  .tab-btn { padding: 12px 12px; font-size: 12px; }
+  .cg   { grid-template-columns: 1fr; }
+  .jg   { grid-template-columns: 1fr; }
+  .struct-grid { grid-template-columns: 1fr; }
+  .color-grid  { grid-template-columns: repeat(2, 1fr); }
+  .usage-grid  { grid-template-columns: 1fr; }
+  .phase-title { font-size: 15px; }
+  .phase-days  { display: none; }
+  .logo-area   { display: none; }
+  .leader-sep  { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     HEADER
+     ═══════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <p class="eyebrow">MANPER C × PGSD E</p>
+      <h1><span class="ac">MAPS</span> Project<br>Workflow &amp; Timeline</h1>
+    </div>
+    <div class="logo-area ac">
+      <!-- <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <div style="width:56px;height:56px;background:var(--yellow);border-radius:10px;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="transform:rotate(-45deg);font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;color:#2C479E;line-height:1;text-align:center">MAPS</span>
+        </div>
+        <span style="font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Project PKN</span>
+      </div> -->
+      <image src="logo.png" style="height: 150px"></image>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════
+     TAB NAV
+     ═══════════════════════════════════ -->
+<div class="tab-nav-wrap">
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('timeline',this)">📅 Timeline</button>
+    <button class="tab-btn"        onclick="switchTab('workflow',this)">🔄 Workflow</button>
+    <button class="tab-btn"        onclick="switchTab('jobdesk',this)">📋 Job Desk</button>
+    <button class="tab-btn"        onclick="switchTab('struktur',this)">👥 Struktur Tim</button>
+    <button class="tab-btn"        onclick="switchTab('guidelines',this)">🎨 Design Guidelines</button>
+  </nav>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════
+     TIMELINE
+     ═══════════════════════════════════ -->
+<div id="tab-timeline" class="tab-panel active">
+  <div class="tl-legend">
+    <div class="leg"><div class="leg-sw" style="background:var(--blue)"></div>Tim Inti</div>
+    <div class="leg"><div class="leg-sw" style="background:var(--blue-light)"></div>Brain</div>
+    <div class="leg"><div class="leg-sw" style="background:var(--yellow)"></div>Executor</div>
+    <div class="leg"><div class="leg-sw" style="background:var(--c-vis)"></div>Visual</div>
+    <div class="leg"><div class="leg-sw" style="background:var(--blue-pale)"></div>Publisher</div>
+  </div>
+  <div class="tl-wrap">
+    <table class="tl">
+      <thead>
+        <tr>
+          <th>Divisi</th>
+          <th>Sen<br><small style="font-weight:500;opacity:.6">H1</small></th>
+          <th>Sel<br><small style="font-weight:500;opacity:.6">H2</small></th>
+          <th>Rab<br><small style="font-weight:500;opacity:.6">H3</small></th>
+          <th>Kam<br><small style="font-weight:500;opacity:.6">H4</small></th>
+          <th>Jum<br><small style="font-weight:500;opacity:.6">H5</small></th>
+          <th class="weekend-col">Sab<br><small style="font-weight:600">H6</small></th>
+          <th class="weekend-col">Min<br><small style="font-weight:600">H7</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gr"><td colspan="8">Tim Inti</td></tr>
+        <tr>
+          <td><div class="tl-name">Ketua / Wakil</div><div class="tl-sub">Koordinasi mingguan</div></td>
+          <td><div class="bar bbl">Kick-off</div></td>
+          <td><div class="bar bbl">Monitor</div></td>
+          <td><div class="bar bbl">Mid-check</div></td>
+          <td><div class="bar bbl">Approval</div></td>
+          <td><div class="bar bbl">Final review</div></td>
+          <td class="weekend-col"><div class="bar bbl">Evaluasi</div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Data Analyst</div><div class="tl-sub">Tren &amp; performa</div></td>
+          <td><div class="bar bbl">Analisis</div></td>
+          <td><div class="bar bbl">Laporan</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar bbl">Riset tren</div></td>
+        </tr>
+        <tr class="gr"><td colspan="8">Brain</td></tr>
+        <tr>
+          <td><div class="tl-name">Tim Penulis</div><div class="tl-sub">Riset &amp; naskah</div></td>
+          <td><div class="bar bbu">Riset materi</div></td>
+          <td><div class="bar bbu">Draft script</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Tim Kreatif</div><div class="tl-sub">Konsep &amp; format</div></td>
+          <td><div class="bar bbu">Konsep topik</div></td>
+          <td><div class="bar bbu">Final konsep</div></td>
+          <td><div class="bar bbu">Brief script</div></td>
+          <td><div class="bar bbu">Arahan shoot</div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr class="gr"><td colspan="8">Executor</td></tr>
+        <tr>
+          <td><div class="tl-name">Logistik</div><div class="tl-sub">Alat &amp; lokasi</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar bye">Siapkan alat</div></td>
+          <td><div class="bar bye">Setup lokasi</div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Talent</div><div class="tl-sub">Di depan kamera</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar bye">Hafal script</div></td>
+          <td><div class="bar bye">Shooting</div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Videografer</div><div class="tl-sub">Produksi</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar bye">Shooting</div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr class="gr"><td colspan="8">Visual</td></tr>
+        <tr>
+          <td><div class="tl-name">Tim Designer</div><div class="tl-sub">Feeds &amp; thumbnail</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar bv">Draft feeds</div></td>
+          <td><div class="bar bv">Revisi feeds</div></td>
+          <td><div class="bar bv">Thumbnail</div></td>
+          <td class="weekend-col"><div class="bar bv">Final assets</div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Tim Editor</div><div class="tl-sub">Post-produksi</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar bv">Ngedit</div></td>
+          <td><div class="bar bv">Ngedit</div></td>
+          <td class="weekend-col"><div class="bar bv">Final + sub</div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr class="gr"><td colspan="8">Publisher</td></tr>
+        <tr>
+          <td><div class="tl-name">Tim QC</div><div class="tl-sub">Pemeriksaan</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar brd">QC semua konten</div></td>
+          <td class="weekend-col"><div class="bar be"></div></td>
+        </tr>
+        <tr>
+          <td><div class="tl-name">Admin</div><div class="tl-sub">Upload &amp; caption</div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td><div class="bar be"></div></td>
+          <td class="weekend-col"><div class="bar bpb">Upload Video #1</div></td>
+          <td class="weekend-col"><div class="bar bpb">Upload V2 + Feeds</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pp-wrap">
+    <div class="pp">📋 <strong>Sen–Sel (H1–H2)</strong> Pra-produksi</div>
+    <div class="pp">🎬 <strong>Rab–Kam (H3–H4)</strong> Eksekusi Konten</div>
+    <div class="pp">🎞️ <strong>Kam–Sab (H4–H6)</strong> Produksi &amp; QC</div>
+    <div class="pp">📤 <strong>Sab (H6)</strong> Check up + Upload Video #1</div>
+    <div class="pp">🚀 <strong>Min (H7)</strong> Upload Video #2 + Feeds &amp; Evaluasi</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     WORKFLOW
+     ═══════════════════════════════════ -->
+<div id="tab-workflow" class="tab-panel">
+
+  <div class="sl" style="margin-top:4px">Overview Alur Mingguan</div>
+  <p class="ov-intro">
+    Setiap pekan menghasilkan <strong>2 reels + 1 konten feeds</strong>.
+  </p>
+
+  <div class="ov-stepper">
+    <div class="ov-row" onclick="scrollToPhase('f1')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--c-inti-bd);color:var(--blue)">📌</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--blue)">Langkah 1 · Sen–Sel (H1–H2)</div>
+        <div class="ov-step-title" style="color:var(--blue)">Kick-off &amp; Laporan Mingguan</div>
+        <div class="ov-step-who">Tim Inti &amp; Data Analyst</div>
+        <div class="ov-step-desc">Analisis performa pekan lalu, evaluasi, bagikan arahan ke semua divisi.</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f1')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--c-brain-bd);color:var(--blue-light)">✍️</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--blue-light)">Langkah 2 · Sen–Sel (H1–H2)</div>
+        <div class="ov-step-title" style="color:var(--blue-light)">Penulisan Materi</div>
+        <div class="ov-step-who">Tim Penulis</div>
+        <div class="ov-step-desc">Riset materi → draft materi. Diserahkan ke Tim Kreatifb.</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f1')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--c-brain-bd);color:var(--blue-light)">💡</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--blue-light)">Langkah 3 · Sen–Sel (H1–H2)</div>
+        <div class="ov-step-title" style="color:var(--blue-light)">Konsep Konten</div>
+        <div class="ov-step-who">Tim Kreatif</div>
+        <div class="ov-step-desc">Rancang ide, format, dan alur cerita untuk 2 video pekan ini. Olah materi menjadi konten kreatif. Membuat script dari materi yang diberikan Tim Penulis</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f2')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--yellow-bd);color:var(--c-exec-text)">🎒</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--c-exec-text)">Langkah 4 · Rab–Kam (H3–H4)</div>
+        <div class="ov-step-title" style="color:var(--c-exec-text)">Persiapan &amp; Eksekusi Konten</div>
+        <div class="ov-step-who">Logistik, Talent, Designer &amp; Tim Kreatif</div>
+        <div class="ov-step-desc">Siapkan alat &amp; lokasi (H3). Talent pahami script (H3). Designer mulai draft feeds (H3). Tim Kreatif brief arahan shoot (H3–H4).</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f2')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--yellow-bd);color:var(--c-exec-text)">🎥</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--c-exec-text)">Langkah 5 · Kam (H4)</div>
+        <div class="ov-step-title" style="color:var(--c-exec-text)">Shooting</div>
+        <div class="ov-step-who">Videografer, Talent &amp; Tim Kreatif</div>
+        <div class="ov-step-desc">Rekam konten video sesuai konsep. Tim Kreatif mengarahkan alur produksi di lapangan.</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f3')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--c-vis-bd);color:var(--c-vis)">✂️</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--c-vis)">Langkah 6 · Kam–Sab (H4–H6)</div>
+        <div class="ov-step-title" style="color:var(--c-vis)">Editing &amp; Desain</div>
+        <div class="ov-step-who">Tim Editor &amp; Tim Designer</div>
+        <div class="ov-step-desc">Edit video (H4–H6), tambah subtitle &amp; musik. Finalisasi carousel feeds, thumbnail, dan cover (H3–H6).</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f3')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:rgba(192,57,43,0.3);color:var(--red)">🔍</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--red)">Langkah 7 · Sab (H6)</div>
+        <div class="ov-step-title" style="color:var(--red)">QC, Approval &amp; Upload Video #1</div>
+        <div class="ov-step-who">Tim QC &amp; Admin</div>
+        <div class="ov-step-desc">Periksa akurasi, audio-visual, typo, dan format. Admin upload Video #1.</div>
+      </div>
+    </div>
+    <div class="ov-row" onclick="scrollToPhase('f4')">
+      <div class="ov-left">
+        <div class="ov-icon" style="border-color:var(--c-inti-bd);color:var(--blue)">🚀</div>
+        <div class="ov-line"></div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-step-num" style="color:var(--blue)">Langkah 8 · Min (H7)</div>
+        <div class="ov-step-title" style="color:var(--blue)">Upload Video #2 + Feeds &amp; Evaluasi</div>
+        <div class="ov-step-who">Admin &amp; Data Analyst</div>
+        <div class="ov-step-desc">Upload Video #2 dan 1 konten feeds. Pantau performa, susun laporan data, riset tren untuk pekan depan.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ov-phases">
+    <div class="ov-phase"><div class="ov-phase-dot" style="background:var(--blue)"></div><span class="ov-phase-text" style="color:var(--blue)">Pra-produksi</span><span class="ov-phase-days">Sen–Sel</span></div>
+    <div class="ov-phase"><div class="ov-phase-dot" style="background:var(--yellow)"></div><span class="ov-phase-text" style="color:#5a5800">Eksekusi</span><span class="ov-phase-days">Rab–Kam</span></div>
+    <div class="ov-phase"><div class="ov-phase-dot" style="background:var(--c-vis)"></div><span class="ov-phase-text" style="color:var(--c-vis)">Produksi &amp; QC</span><span class="ov-phase-days">Kam–Sab</span></div>
+    <div class="ov-phase"><div class="ov-phase-dot" style="background:var(--blue-light)"></div><span class="ov-phase-text" style="color:var(--blue-light)">Publishing</span><span class="ov-phase-days">Sab–Min</span></div>
+  </div>
+
+  <div class="sl" style="margin-top:40px">Detail Per Fase</div>
+
+  <div class="phase-block f1">
+    <div class="phase-header">
+      <div class="phase-num">1</div><div class="phase-title">Pra-Produksi</div>
+      <div class="phase-days">Sen — Sel (H1–H2)</div>
+    </div>
+    <div class="cg">
+      <div class="card vbl">
+        <div class="ct"><div><div class="cd">Data Analyst</div><div class="cn">Analisis Mingguan</div></div><div class="ci">📊</div></div>
+        <ul class="tl-tasks"><li>Analisis hasil produksi &amp; tren viral sebelumnya</li><li>Laporkan &amp; rekomendasikan untuk produksi berikutnya</li></ul>
+      </div>
+      <div class="card vbu">
+        <div class="ct"><div><div class="cd">Tim Kreatif</div><div class="cn">Konsep &amp; Format Konten</div></div><div class="ci">💡</div></div>
+        <ul class="tl-tasks"><li>Rancang ide &amp; alur cerita untuk 2 video</li><li>Tentukan format (storytelling / edukasi / drama)</li><li>Brief &amp; koordinasi dengan Tim Penulis</li></ul>
+      </div>
+      <div class="card vbu">
+        <div class="ct"><div><div class="cd">Tim Penulis</div><div class="cn">Penulisan Materi</div></div><div class="ci">✍️</div></div>
+        <ul class="tl-tasks"><li>Riset materi dari sumber terpercaya</li><li>Tulis draft → revisi → materi final</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fa">↓</div>
+
+  <div class="phase-block f2">
+    <div class="phase-header">
+      <div class="phase-num">2</div><div class="phase-title">Eksekusi Konten</div>
+      <div class="phase-days">Rab — Kam (H3–H4)</div>
+    </div>
+    <div class="cg">
+      <div class="card vye">
+        <div class="ct"><div><div class="cd">Tim Logistik</div><div class="cn">Persiapan Alat &amp; Lokasi</div></div><div class="ci">🎒</div></div>
+        <ul class="tl-tasks"><li>Cek &amp; siapkan semua peralatan shooting</li><li>Sediakan properti sesuai konsep video</li><li>Setup &amp; urus izin lokasi</li></ul>
+      </div>
+      <div class="card vye">
+        <div class="ct"><div><div class="cd">Talent</div><div class="cn">Persiapan &amp; Penampilan</div></div><div class="ci">🎭</div></div>
+        <ul class="tl-tasks"><li>Hafal script (H3) sebelum hari shooting</li><li>Tampil di depan kamera (H4)</li><li>Ikuti arahan Tim Kreatif saat produksi</li></ul>
+      </div>
+      <div class="card vye">
+        <div class="ct"><div><div class="cd">Videografer</div><div class="cn">Pengambilan Gambar</div></div><div class="ci">🎥</div></div>
+        <ul class="tl-tasks"><li>Rekam video sesuai konsep &amp; script</li><li>Atur komposisi &amp; pencahayaan tiap shot</li><li>Kelola &amp; simpan footage secara terorganisir</li></ul>
+      </div>
+      <div class="card vbu">
+        <div class="ct"><div><div class="cd">Tim Kreatif</div><div class="cn">Arahan di Lapangan</div></div><div class="ci">🎬</div></div>
+        <ul class="tl-tasks"><li>Pastikan rekaman sesuai konsep</li><li>Koordinasi Videografer &amp; Talent</li><li>Ambil keputusan cepat jika ada perubahan</li></ul>
+      </div>
+      <div class="card vvs">
+        <div class="ct"><div><div class="cd">Tim Designer</div><div class="cn">Membuat Konten Feeds</div></div><div class="ci">🎨</div></div>
+        <ul class="tl-tasks"><li>Mulai membuat draft feeds &amp; carousel</li><li>Sesuaikan dengan branding MAPS</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fa">↓</div>
+
+  <div class="phase-block f3">
+    <div class="phase-header">
+      <div class="phase-num">3</div><div class="phase-title">Produksi &amp; QC</div>
+      <div class="phase-days">Kam — Sab (H4–H6)</div>
+    </div>
+    <div class="cg">
+      <div class="card vvs">
+        <div class="ct"><div><div class="cd">Tim Editor</div><div class="cn">Editing Video</div></div><div class="ci">✂️</div></div>
+        <ul class="tl-tasks"><li>Seleksi footage terbaik &amp; susun alur</li><li>Tambahkan subtitle, musik, &amp; efek</li><li>Sesuaikan format per platform (Reels, Feed)</li><li>Finishing &amp; cek kualitas akhir</li></ul>
+      </div>
+      <div class="card vvs">
+        <div class="ct"><div><div class="cd">Tim Designer</div><div class="cn">Finalisasi Visual</div></div><div class="ci">🖼️</div></div>
+        <ul class="tl-tasks"><li>Finalisasi carousel feeds</li><li>Buat thumbnail &amp; cover yang menarik</li><li>Koordinasi elemen visual dengan Tim Editor</li></ul>
+      </div>
+      <div class="card vrd">
+        <div class="ct"><div><div class="cd">Tim QC</div><div class="cn">Pemeriksaan Menyeluruh</div></div><div class="ci">🔍</div></div>
+        <ul class="tl-tasks"><li>Periksa akurasi informasi &amp; kesesuaian konsep</li><li>Cek typo, grammar, subtitle, &amp; overlay</li><li>Uji kualitas audio-visual &amp; format platform</li><li>Berikan catatan revisi spesifik jika perlu</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fa">↓</div>
+
+  <div class="phase-block f4">
+    <div class="phase-header">
+      <div class="phase-num">4</div><div class="phase-title">Publishing &amp; Evaluasi</div>
+      <div class="phase-days">Sab — Min (H6–H7)</div>
+    </div>
+    <div class="cg">
+      <div class="card vpb">
+        <div class="ct"><div><div class="cd">Admin</div><div class="cn">Upload Konten</div></div><div class="ci">🚀</div></div>
+        <ul class="tl-tasks">
+          <li>Sab (H6): Upload Video #1 + caption &amp; hashtag</li>
+          <li>Min (H7): Upload Video #2 + 1 postingan feeds</li>
+          <li>Optimalkan waktu posting tiap konten</li>
+          <li>Pantau perkembangan awal pasca-upload</li>
+        </ul>
+      </div>
+      <div class="card vbl">
+        <div class="ct"><div><div class="cd">Data Analyst</div><div class="cn">Monitoring &amp; Riset</div></div><div class="ci">📈</div></div>
+        <ul class="tl-tasks"><li>Pantau performa konten yang tayang</li><li>Riset tren viral untuk pekan depan</li></ul>
+      </div>
+      <div class="card vbl">
+        <div class="ct"><div><div class="cd">Tim Inti</div><div class="cn">Evaluasi Mingguan</div></div><div class="ci">🔄</div></div>
+        <ul class="tl-tasks">
+          <li>Review capaian &amp; hambatan pekan ini</li>
+          <li>Sesuaikan strategi berdasarkan data</li>
+          <li>Siapkan kick-off siklus pekan depan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-workflow -->
+
+<!-- ═══════════════════════════════════
+     JOB DESK
+     ═══════════════════════════════════ -->
+<div id="tab-jobdesk" class="tab-panel">
+  <div class="sl" style="margin-top:4px">Note</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div><div class="jn">"Setiap kegiatan yang menghasilkan data, masukkan data tersebut ke link drive yang sudah disediakan"</div></div></div></div>
+  </div>
+
+  <div class="sl" style="margin-top:4px">Tim Inti</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-inti-bg)">🧭</div><div><div class="jn">Ketua</div><div class="jt">Tim Inti · Mu'adz</div></div></div><div class="jb"><ul class="jl"><li>Pantau perkembangan semua divisi</li><li>Pengambil keputusan utama saat ada hambatan</li><li>Evaluasi &amp; penyesuaian strategi tiap akhir pekan</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-inti-bg)">🤝</div><div><div class="jn">Wakil Ketua</div><div class="jt">Tim Inti · Dinni</div></div></div><div class="jb"><ul class="jl"><li>Koordinasi antar tim sesuai arahan Ketua</li><li>Backup Ketua saat dibutuhkan</li><li>Pantau ritme kerja tiap divisi</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-inti-bg)">📊</div><div><div class="jn">Data Analyst</div><div class="jt">Tim Inti (6 orang)</div></div></div><div class="jb"><ul class="jl"><li>Masukkan data konten produksi setiap 1 pekan sekali</li><li>Riset tren konten tiap awal pekan</li><li>Rekomendasikan topik &amp; format ke Brain</li><li>Analisis performa konten yang sudah tayang</li><li>Susun laporan data tiap pekan dan bulan (laporan dalam bentuk pdf)</li></ul></div></div>
+  </div>
+
+  <div class="sl">Brain</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-brain-bg)">💡</div><div><div class="jn">Tim Kreatif</div><div class="jt">Brain (12 orang)</div></div></div><div class="jb"><ul class="jl"><li>Mengolah materi dari tim penulis menjadi script konten</li><li>Rancang konsep &amp; format tiap video</li><li>Tentukan alur cerita yang menarik &amp; edukatif</li><li>Brief &amp; diskusi intensif dengan Tim Penulis</li><li>Hadir &amp; arahkan rekaman saat shooting</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-brain-bg)">✍️</div><div><div class="jn">Tim Penulis</div><div class="jt">Brain (11 orang)</div></div></div><div class="jb"><ul class="jl"><li>Riset materi dari sumber terpercaya</li><li>Tulis draft materi → revisi → final</li><li>Cari data &amp; kasus nyata untuk konten isu sosial</li><li>Jaga konsistensi gaya bahasa</li></ul></div></div>
+  </div>
+
+  <div class="sl">Executor</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-exec-bg)">🎒</div><div><div class="jn">Tim Logistik</div><div class="jt">Executor (10 orang)</div></div></div><div class="jb"><ul class="jl"><li>Cek &amp; siapkan semua peralatan shooting</li><li>Sediakan properti pendukung sesuai konsep</li><li>Urus persiapan &amp; izin lokasi</li><li>Rapikan semua alat pasca-shooting</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-exec-bg)">🎥</div><div><div class="jn">Videografer</div><div class="jt">Executor (6 orang)</div></div></div><div class="jb"><ul class="jl"><li>Rekam semua adegan dengan kualitas terbaik</li><li>Atur komposisi &amp; pencahayaan tiap shot</li><li>Kelola &amp; simpan footage secara terorganisir</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-exec-bg)">🎭</div><div><div class="jn">Tim Talent</div><div class="jt">Executor (13 orang)</div></div></div><div class="jb"><ul class="jl"><li>Hafal &amp; sampaikan script dengan menarik</li><li>Tampil di depan kamera sesuai jadwal</li><li>Ikuti arahan Tim Kreatif</li><li>Siap retake jika dibutuhkan</li></ul></div></div>
+  </div>
+
+  <div class="sl">Visual</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-vis-bg)">✂️</div><div><div class="jn">Tim Editor</div><div class="jt">Visual (7 orang)</div></div></div><div class="jb"><ul class="jl"><li>Seleksi &amp; susun footage terbaik</li><li>Tambahkan subtitle, musik, &amp; transisi</li><li>Sesuaikan format output per platform</li><li>Finishing &amp; review sebelum ke QC</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-vis-bg)">🖼️</div><div><div class="jn">Tim Designer</div><div class="jt">Visual (8 orang)</div></div></div><div class="jb"><ul class="jl"><li>Buat carousel feeds yang informatif &amp; estetis</li><li>Desain thumbnail &amp; cover tiap video</li><li>Jaga konsistensi visual branding MAPS</li><li>Koordinasi elemen visual dengan Tim Editor</li></ul></div></div>
+  </div>
+
+  <div class="sl">Publisher</div>
+  <div class="jg">
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-pub-bg)">🔍</div><div><div class="jn">Tim QC</div><div class="jt">Publisher (5 orang)</div></div></div><div class="jb"><ul class="jl"><li>Cek akurasi informasi &amp; kesesuaian konsep</li><li>Periksa typo, grammar, subtitle &amp; overlay</li><li>Uji kualitas audio-visual &amp; format platform</li><li>Berikan catatan revisi spesifik jika ada masalah</li></ul></div></div>
+    <div class="jc"><div class="jh"><div class="ji" style="background:var(--c-pub-bg)">🚀</div><div><div class="jn">Admin</div><div class="jt">Publisher (4 orang)</div></div></div><div class="jb"><ul class="jl"><li>Upload 2 video &amp; 1 feeds tiap Minggu</li><li>Tulis caption engaging + hashtag strategis</li><li>Optimalkan waktu posting</li><li>Laporkan performa ke Data Analyst</li></ul></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     STRUKTUR TIM
+     ═══════════════════════════════════ -->
+<div id="tab-struktur" class="tab-panel">
+
+  <!-- Leadership -->
+  <div class="sl">Tim Inti</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-inti-bg)">🧭</div>
+        <div>
+          <div class="struct-div-name">Ketua & Wakil Ketua</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Mu'adz</div><div class="mrole" style="color:var(--muted)">Ketua</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Dinni</div><div class="mrole" style="color:var(--muted)">Wakil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tim Inti – Data Analyst -->
+  <div class="sl">Tim Inti — Data Analyst</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-inti-bg)">📊</div>
+        <div>
+          <div class="struct-div-name">Data Analyst</div>
+          <div class="struct-div-cat" style="color:var(--blue)">Tim Inti · 6 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Adinda</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Aisya</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Alisya</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Andini</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Meylinda</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Reyfan</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brain -->
+  <div class="sl">Brain</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-brain-bg)">✍️</div>
+        <div>
+          <div class="struct-div-name">Tim Penulis</div>
+          <div class="struct-div-cat" style="color:var(--blue-light)">Brain · 11 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Alyka</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Andhini</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Desi</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Firni</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Hasna</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Indah</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Mishka</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">8</div><div class="mname">Naya</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">9</div><div class="mname">Rianti</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">10</div><div class="mname">Syifa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">11</div><div class="mname">Wulan</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-brain-bg)">💡</div>
+        <div>
+          <div class="struct-div-name">Tim Kreatif</div>
+          <div class="struct-div-cat" style="color:var(--blue-light)">Brain · 12 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Adrine</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Agnes</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Destri</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Devina</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Early</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Indri</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Lexa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">8</div><div class="mname">Maya</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">9</div><div class="mname">Muty</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">10</div><div class="mname">Nayla</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">11</div><div class="mname">Revany</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">12</div><div class="mname">Shelia</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Executor -->
+  <div class="sl">Executor</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-exec-bg)">🎥</div>
+        <div>
+          <div class="struct-div-name">Videografer</div>
+          <div class="struct-div-cat" style="color:#5a5800">Executor · 6 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Anjaenny</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Aulia</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Bunga</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Eriska</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Rubi</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Tytania</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-exec-bg)">🎒</div>
+        <div>
+          <div class="struct-div-name">Tim Logistik</div>
+          <div class="struct-div-cat" style="color:#5a5800">Executor · 10 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Adara</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Ayu</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Elsa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Fadhilah</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Fadhilatun</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Kaysha</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Marwa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">8</div><div class="mname">Ranti</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">9</div><div class="mname">Rasy</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">10</div><div class="mname">Salma</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-exec-bg)">🎭</div>
+        <div>
+          <div class="struct-div-name">Tim Talent</div>
+          <div class="struct-div-cat" style="color:#5a5800">Executor · 13 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Ahmad</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Alden</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Citra</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Maritza</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Melani</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Melisa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Nadin</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">8</div><div class="mname">Naufal</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">9</div><div class="mname">Reksi</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">10</div><div class="mname">Sarah</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">11</div><div class="mname">Shanaz</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">12</div><div class="mname">Syerin</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">13</div><div class="mname">Zamira</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual -->
+  <div class="sl">Visual</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-vis-bg)">✂️</div>
+        <div>
+          <div class="struct-div-name">Tim Editor</div>
+          <div class="struct-div-cat" style="color:var(--c-vis)">Visual · 7 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Annisa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Astrid</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Azalia</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Izyan</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Kelly</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Natasha</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Talitha</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-vis-bg)">🖼️</div>
+        <div>
+          <div class="struct-div-name">Tim Designer</div>
+          <div class="struct-div-cat" style="color:var(--c-vis)">Visual · 8 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Arsyifha</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Dita</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Janisa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Kayla</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Rita</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">6</div><div class="mname">Sabila</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">7</div><div class="mname">Wafa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">8</div><div class="mname">Zamal</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Publisher -->
+  <div class="sl">Publisher</div>
+  <div class="struct-grid">
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-pub-bg)">🔍</div>
+        <div>
+          <div class="struct-div-name">Tim QC</div>
+          <div class="struct-div-cat" style="color:var(--blue-light)">Publisher · 5 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Agisna</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Majidah</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Naura</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Renata</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">5</div><div class="mname">Zenobhia</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+    <div class="struct-card">
+      <div class="struct-header">
+        <div class="struct-icon" style="background:var(--c-pub-bg)">🚀</div>
+        <div>
+          <div class="struct-div-name">Admin</div>
+          <div class="struct-div-cat" style="color:var(--blue-light)">Publisher · 4 orang</div>
+        </div>
+      </div>
+      <div class="struct-body">
+        <div class="member-row"><div class="member-num">1</div><div class="mname">Amel</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">2</div><div class="mname">Fidela</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">3</div><div class="mname">Fitri</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+        <div class="member-row"><div class="member-num">4</div><div class="mname">Reysa</div><div class="mrole" style="color:var(--muted)">Anggota</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-struktur -->
+
+<!-- ═══════════════════════════════════
+     DESIGN GUIDELINES
+     ═══════════════════════════════════ -->
+<div id="tab-guidelines" class="tab-panel">
+
+  <div class="dg-intro" style="margin-top:4px">
+    Panduan visual resmi untuk semua konten Project MAPS. Gunakan warna, font, dan gaya yang tercantum di sini agar semua output konten terlihat konsisten &amp; profesional.
+    <strong>Setiap postingan wajib mengikuti guidelines ini.</strong>
+  </div>
+
+  <!-- WARNA UTAMA -->
+  <div class="sl">Warna Utama</div>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#2C479E"></div>
+      <div class="color-info">
+        <div class="color-name">Blue</div>
+        <div class="color-hex">#2C479E</div>
+        <div class="color-role">Warna Primer</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#DBD961;border:1px solid #e0e0e0"></div>
+      <div class="color-info">
+        <div class="color-name">Yellow</div>
+        <div class="color-hex">#DBD961</div>
+        <div class="color-role">Warna Aksen</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#FFFFFF;border:1px solid #e8e8e8"></div>
+      <div class="color-info">
+        <div class="color-name">White</div>
+        <div class="color-hex">#FFFFFF</div>
+        <div class="color-role">Warna Background</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRADASI WARNA -->
+  <div class="sl">Gradasi Warna</div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Gradasi dapat digunakan untuk background section, overlay, atau elemen dekoratif.</p>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px">
+    <div>
+      <p style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase">Blue Ramp</p>
+      <div class="grad-strip">
+        <div class="grad-step" style="background:#2C479E"><span>#2C479E</span></div>
+        <div class="grad-step" style="background:#5167AE"><span>#5167AE</span></div>
+        <div class="grad-step" style="background:#8493C6"><span>#8493C6</span></div>
+        <div class="grad-step" style="background:#98A5CF"><span>#98A5CF</span></div>
+        <div class="grad-step" style="background:#C4CCDF"><span>#C4CCDF</span></div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:700;color:#5a5800;margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase">Yellow Ramp</p>
+      <div class="grad-strip">
+        <div class="grad-step" style="background:#B8B62A"><span style="color:rgba(0,0,0,0.6)">#B8B62A</span></div>
+        <div class="grad-step" style="background:#DBD961"><span style="color:rgba(0,0,0,0.5)">#DBD961</span></div>
+        <div class="grad-step" style="background:#E8E78A"><span style="color:rgba(0,0,0,0.45)">#E8E78A</span></div>
+        <div class="grad-step" style="background:#F2F1B0"><span style="color:rgba(0,0,0,0.4)">#F2F1B0</span></div>
+        <div class="grad-step" style="background:#FAF9D8;border:1px solid #e0e0e0"><span style="color:rgba(0,0,0,0.35)">#FAF9D8</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FONT -->
+  <div class="sl">Tipografi</div>
+
+  <div class="font-card">
+    <div class="font-header">
+      <div>
+        <div class="font-label">Heading Font</div>
+        <div class="font-name">Nexa Bold</div>
+      </div>
+      <div class="font-meta">Ukuran: 58pt · Spasi: 0pt · Antar-huruf: 1pt</div>
+    </div>
+    <div class="font-preview">
+      <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:32px;color:var(--blue);letter-spacing:.01em;line-height:1.1">Project MAPS</p>
+      <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:var(--text);letter-spacing:.01em;margin-top:8px;opacity:.5">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+      <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--muted);letter-spacing:.01em">a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+    </div>
+    <div class="font-specs">
+      <div class="font-spec-item">Digunakan untuk: <strong>Judul utama, heading besar</strong></div>
+      <div class="font-spec-item">Berat: <strong>Bold / 800</strong></div>
+    </div>
+  </div>
+
+  <div class="font-card">
+    <div class="font-header">
+      <div>
+        <div class="font-label">Sub-heading Font</div>
+        <div class="font-name">Glacial Indifference Bold</div>
+      </div>
+      <div class="font-meta">Ukuran: 28pt · Spasi: 0pt · Antar-huruf: 1.4pt</div>
+    </div>
+    <div class="font-preview">
+      <p style="font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:22px;color:var(--text);letter-spacing:.04em;line-height:1.2">Sub-heading Konten MAPS</p>
+      <p style="font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:14px;color:var(--muted);letter-spacing:.04em;margin-top:8px;opacity:.6">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+    </div>
+    <div class="font-specs">
+      <div class="font-spec-item">Digunakan untuk: <strong>Sub-judul, label section</strong></div>
+      <div class="font-spec-item">Berat: <strong>Bold / 700</strong></div>
+    </div>
+  </div>
+
+  <div class="font-card">
+    <div class="font-header">
+      <div>
+        <div class="font-label">Body / Content Font</div>
+        <div class="font-name">Glacial Indifference</div>
+      </div>
+      <div class="font-meta">Ukuran: 20pt · Spasi: 0pt · Antar-huruf: 1.4pt</div>
+    </div>
+    <div class="font-preview">
+      <p style="font-family:'Nunito Sans',sans-serif;font-weight:400;font-size:16px;color:var(--text);letter-spacing:.04em;line-height:1.6">Teks body, deskripsi konten, caption, dan keterangan gambar menggunakan font ini. Pastikan ukuran terbaca dengan jelas di semua platform.</p>
+    </div>
+    <div class="font-specs">
+      <div class="font-spec-item">Digunakan untuk: <strong>Body text, caption, keterangan</strong></div>
+      <div class="font-spec-item">Berat: <strong>Regular / 400</strong></div>
+    </div>
+  </div>
+
+  <!-- PANDUAN PENGGUNAAN -->
+  <div class="sl">Panduan Penggunaan untuk Postingan</div>
+  <div class="usage-grid">
+    <div class="usage-card" style="border-top-color:#2C479E">
+      <div class="usage-icon">🎨</div>
+      <div class="usage-title">Warna Background</div>
+      <div class="usage-desc">Gunakan Blue (#2C479E) sebagai background utama, atau White (#FFFFFF) untuk konten yang lebih ringan.</div>
+      <span class="usage-tag" style="background:var(--c-inti-bg);color:var(--blue)">Tim Designer</span>
+    </div>
+    <div class="usage-card" style="border-top-color:#DBD961">
+      <div class="usage-icon">✨</div>
+      <div class="usage-title">Aksen &amp; Highlight</div>
+      <div class="usage-desc">Yellow (#DBD961) digunakan untuk highlight, call-to-action, atau elemen yang ingin ditonjolkan.</div>
+      <span class="usage-tag" style="background:var(--c-exec-bg);color:var(--c-exec-text)">Tim Designer</span>
+    </div>
+    <div class="usage-card" style="border-top-color:#5167AE">
+      <div class="usage-icon">📝</div>
+      <div class="usage-title">Hierarki Teks</div>
+      <div class="usage-desc">Nexa Bold untuk judul besar, Glacial Indifference Bold untuk sub-judul, Glacial Indifference regular untuk isi konten.</div>
+      <span class="usage-tag" style="background:var(--c-brain-bg);color:var(--blue-light)">Tim Penulis &amp; Designer</span>
+    </div>
+    <div class="usage-card" style="border-top-color:#8493C6">
+      <div class="usage-icon">📐</div>
+      <div class="usage-title">Konsistensi Visual</div>
+      <div class="usage-desc">Semua konten — feeds, thumbnail, video intro — harus menggunakan palette warna dan font yang sama.</div>
+      <span class="usage-tag" style="background:var(--c-pub-bg);color:var(--blue-light)">Tim QC</span>
+    </div>
+    <div class="usage-card" style="border-top-color:#DBD961">
+      <div class="usage-icon">🖼️</div>
+      <div class="usage-title">Carousel &amp; Feeds</div>
+      <div class="usage-desc">Cover slide: Blue + Yellow accent. Slide isi: White background + Blue text. Slide penutup: Yellow background + Blue text.</div>
+      <span class="usage-tag" style="background:var(--c-exec-bg);color:var(--c-exec-text)">Tim Designer</span>
+    </div>
+    <div class="usage-card" style="border-top-color:#2C479E">
+      <div class="usage-icon">🎬</div>
+      <div class="usage-title">Video &amp; Thumbnail</div>
+      <div class="usage-desc">Thumbnail menggunakan foto/visual utama + overlay Blue transparan + teks Nexa Bold berwarna White atau Yellow.</div>
+      <span class="usage-tag" style="background:var(--c-vis-bg);color:var(--c-vis)">Tim Editor &amp; Designer</span>
+    </div>
+  </div>
+
+</div><!-- /tab-guidelines -->
+
+</div><!-- /content -->
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function scrollToPhase(cls) {
+  if (!document.getElementById('tab-workflow').classList.contains('active')) return;
+  const el = document.querySelector('.' + cls);
+  if (!el) return;
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.style.outline = '2px solid #2C479E';
+    el.style.borderRadius = '12px';
+    setTimeout(() => { el.style.outline = 'none'; }, 1400);
+  }, 60);
+}
+</script>
+</body>
+</html>
